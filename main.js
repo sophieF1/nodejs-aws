@@ -7,26 +7,26 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var log = require('./routes/log');
 var app = express();
 
 log = require('./routes/log');
 var path = require('path');
-var log = require('./routes/log');
-app.get('/logs', log.index);
-app.post('/add_log', log.add_log);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.get('/logs', log.index);
+app.post('/add_log', log.add_log);
 
 app.use('/', index);
 app.use('/users', users);
